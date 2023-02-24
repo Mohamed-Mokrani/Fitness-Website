@@ -1,12 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap");
 
+@keyframes logo-animation {
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Chakra Petch", sans-serif;
   font-weight: 600;
-  
+}
+
+.App {
+  background-color: black;
+  overflow-x: hidden;
 }
 /* NAV BAR */
 
@@ -14,22 +40,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image: linear-gradient(black, white);
-
-  padding: 0 20px;
+  background-image: linear-gradient(black, rgba(0, 0, 0, 0));
+  position: fixed;
+  padding: 0 50px;
+  width: 99vw;
+  z-index: 1;
+  transition: 500ms;
 }
 
 .nav-bar img {
-  width: 60px;
+  width: 50px;
   margin-top: 5px;
   margin-bottom: -5px;
   cursor: pointer;
-  
+  animation: logo-animation 3s infinite;
 }
 
 .nav-p {
   display: flex;
-  width: 250px;
+  width: 300px;
   justify-content: space-between;
   margin-left: -85px;
   background-color: transparent;
@@ -42,46 +71,54 @@
 }
 
 .nav-p p:hover {
-  color: red;
+  color: rgb(57, 153, 255);
 }
 
 .fa-user {
   color: white;
   cursor: pointer;
   transition: all 500ms;
-  
+  font-size: 20px;
 }
 
 .fa-user:hover {
-  color: red;
+  color: rgb(57, 153, 255);
 }
 
 .profile-options {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.907);
   position: absolute;
-  width: 214px;
-  height: 50px;
-  margin: 18px 0 0 -180px;
-  border-left: 1px solid white;
-  border-bottom: 1px solid white;
+  width: 220px;
+  height: 250px;
+  margin: 18px 0 0 -190px;
+  border: white 1px solid;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1px;
-  transition: all 500px;
+  animation: fadeIn 500ms;
+  animation-fill-mode: forwards;
+  opacity: 0;
 }
 
-.profile-options h1 {
+
+
+.profile-options p {
   font-size: 16px;
   text-align: center;
   width: 213px;
   cursor: pointer;
-  
 }
 
-.profile-options h1:hover{
+.profile-options p:hover {
   background-color: rgba(255, 255, 255, 0.145);
   color: red;
+}
+
+/* Home */
+
+.home-video video {
+  width: 1520px;
 }
