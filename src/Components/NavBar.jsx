@@ -6,7 +6,7 @@ const NavBar = () => {
   const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("");
 
   const profileOptionsRef = useRef(null);
-  const hideProfileOptionsTimeoutRef = useRef(null);
+  const hideProfileOptionsRef = useRef(null);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
@@ -14,13 +14,14 @@ const NavBar = () => {
   };
 
   const hideProfileOptions = () => {
-    hideProfileOptionsTimeoutRef.current = setTimeout(() => {
+    hideProfileOptionsRef.current = setTimeout(() => {
       setLogin(false);
-    }, 200);
+    }, 300);
   };
 
-  const cancelHideProfileOptions = () => {
-    clearTimeout(hideProfileOptionsTimeoutRef.current);
+  const profileOptions = () => {
+    clearTimeout(hideProfileOptionsRef.current);
+    setLogin(true);
   };
 
   useEffect(() => {
@@ -45,19 +46,34 @@ const NavBar = () => {
         <p>
           <i
             className="fa-solid fa-user"
-            onMouseEnter={() => setLogin(true)}
+            onMouseEnter={profileOptions}
             onMouseLeave={hideProfileOptions}
           ></i>
         </p>
         {login && (
           <div
             className="profile-options"
-            onMouseEnter={cancelHideProfileOptions}
+            onMouseEnter={profileOptions}
             onMouseLeave={hideProfileOptions}
             ref={profileOptionsRef}
           >
-            <p>Login</p>
-            <p>Sign up</p>
+            <i class="fa-solid fa-caret-up"></i>
+
+            <p>
+              My Shop <i class="fa-solid fa-cart-shopping"></i>
+            </p>
+            <p>
+              Settings <i class="fa-solid fa-gear"></i>
+            </p>
+            <p>
+              Membership <i class="fa-solid fa-money-check-dollar"></i>
+            </p>
+            <p className="premium">
+              Premium <i class="fa-solid fa-star"></i>
+            </p>
+            <p>
+              Logout<i class="fa-solid fa-right-from-bracket"></i>
+            </p>
           </div>
         )}
       </div>

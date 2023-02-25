@@ -90,12 +90,12 @@
   position: absolute;
   width: 220px;
   height: 250px;
-  margin: 18px 0 0 -190px;
-  border: white 1px solid;
+  margin: 20px 0 0 -190px;
+  border: rgba(255, 255, 255, 0.29) 1px solid;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1px;
   animation: fadeIn 500ms;
@@ -103,20 +103,38 @@
   opacity: 0;
 }
 
-
-
 .profile-options p {
   font-size: 16px;
-  text-align: center;
-  width: 213px;
+  width: 220px;
+  padding: 0 10px;
   cursor: pointer;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 500ms;
+  border-top: 1px solid rgba(255, 255, 255, 0.133);
 }
 
 .profile-options p:hover {
-  background-color: rgba(255, 255, 255, 0.145);
-  color: red;
+  color: rgb(57, 153, 255);
+ 
+  
 }
 
+.fa-caret-up {
+  position: absolute;
+  margin: -14px -178px 0 0;
+}
+
+.profile-options .fa-solid {
+  margin-bottom: -3px;
+
+  
+}
+.premium:hover {
+  color: gold!important;
+}
 /* Home */
 
 .home-video video {
