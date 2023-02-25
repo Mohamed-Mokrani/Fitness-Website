@@ -4,7 +4,11 @@ import NavLogo from "../Storage/Nav-logo.png";
 const NavBar = () => {
   const [login, setLogin] = useState(false);
   const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("");
-  const [loginColor, setLoginColor] = useState({ color: "white", rotate: "" });
+  const [loginCss, setLoginCss] = useState({
+    color: "white",
+    rotate: "",
+    opacity: "0",
+  });
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
@@ -28,22 +32,24 @@ const NavBar = () => {
     };
   }, []);
 
-  //
+  const opacityOut = () =>
+    setLoginCss((prevState) => ({ ...prevState, opacity: "0" }));
+
   const btnHover = () =>
-    setLoginColor((prevState) => ({
+    setLoginCss((prevState) => ({
       ...prevState,
       color: "rgb(57, 153, 255)",
       rotate: "rotateY(180deg)",
+      opacity: "1",
     }));
 
   const btnUnhover = () =>
-    setTimeout(() => {
-      setLoginColor((prevState) => ({
-        ...prevState,
-        color: "white",
-        rotate: "rotateY(0deg)",
-      }));
-    }, 300);
+    setLoginCss((prevState) => ({
+      ...prevState,
+      color: "white",
+      rotate: "rotateY(0deg)",
+      opacity: "0",
+    }));
 
   //
   return (
@@ -65,7 +71,7 @@ const NavBar = () => {
               profileOptions();
               btnHover();
             }}
-            style={{ color: loginColor.color, transform: loginColor.rotate }}
+            style={{ color: loginCss.color, transform: loginCss.rotate }}
           ></i>
         </p>
         {login && (
@@ -74,7 +80,9 @@ const NavBar = () => {
             onMouseLeave={() => {
               hideProfileOptions();
               btnUnhover();
+              opacityOut();
             }}
+            style={{ opacity: loginCss.opacity }}
           >
             <i class="fa-solid fa-caret-up"></i>
             <div className="invisible-profile"></div>
