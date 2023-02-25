@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import NavLogo from "../Storage/Nav-logo.png";
 
 const NavBar = () => {
   const [login, setLogin] = useState(false);
   const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("");
-
-  const profileOptionsRef = useRef(null);
-  const hideProfileOptionsRef = useRef(null);
+  const [loginColor, setLoginColor] = useState({ color: "white", rotate: "" });
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
@@ -14,13 +12,12 @@ const NavBar = () => {
   };
 
   const hideProfileOptions = () => {
-    hideProfileOptionsRef.current = setTimeout(() => {
+    setTimeout(() => {
       setLogin(false);
     }, 300);
   };
 
   const profileOptions = () => {
-    clearTimeout(hideProfileOptionsRef.current);
     setLogin(true);
   };
 
@@ -31,6 +28,24 @@ const NavBar = () => {
     };
   }, []);
 
+  //
+  const btnHover = () =>
+    setLoginColor((prevState) => ({
+      ...prevState,
+      color: "rgb(57, 153, 255)",
+      rotate: "rotateY(180deg)",
+    }));
+
+  const btnUnhover = () =>
+    setTimeout(() => {
+      setLoginColor((prevState) => ({
+        ...prevState,
+        color: "white",
+        rotate: "rotateY(0deg)",
+      }));
+    }, 300);
+
+  //
   return (
     <div className="nav-bar" style={{ backgroundColor: navBarBackgroundColor }}>
       <div>
@@ -46,18 +61,23 @@ const NavBar = () => {
         <p>
           <i
             className="fa-solid fa-user"
-            onMouseEnter={profileOptions}
-            onMouseLeave={hideProfileOptions}
+            onMouseEnter={() => {
+              profileOptions();
+              btnHover();
+            }}
+            style={{ color: loginColor.color, transform: loginColor.rotate }}
           ></i>
         </p>
         {login && (
           <div
             className="profile-options"
-            onMouseEnter={profileOptions}
-            onMouseLeave={hideProfileOptions}
-            ref={profileOptionsRef}
+            onMouseLeave={() => {
+              hideProfileOptions();
+              btnUnhover();
+            }}
           >
             <i class="fa-solid fa-caret-up"></i>
+            <div className="invisible-profile"></div>
 
             <p>
               My Shop <i class="fa-solid fa-cart-shopping"></i>
