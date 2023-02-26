@@ -3,6 +3,7 @@ import NavLogo from "../Storage/Nav-logo.png";
 
 const NavBar = () => {
   const [login, setLogin] = useState(false);
+  const [shop, setShop] = useState(false);
   const [navBarBackgroundColor, setNavBarBackgroundColor] = useState("");
   const [loginCss, setLoginCss] = useState({
     color: "white",
@@ -10,19 +11,14 @@ const NavBar = () => {
     opacity: "0",
   });
 
+  const [shopCss, setShopCss] = useState({
+    color: "white",
+    opacity: "0",
+  });
+
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
     setNavBarBackgroundColor(scrollPosition > 0 ? "black" : "");
-  };
-
-  const hideProfileOptions = () => {
-    setTimeout(() => {
-      setLogin(false);
-    }, 300);
-  };
-
-  const profileOptions = () => {
-    setLogin(true);
   };
 
   useEffect(() => {
@@ -32,26 +28,6 @@ const NavBar = () => {
     };
   }, []);
 
-  const opacityOut = () =>
-    setLoginCss((prevState) => ({ ...prevState, opacity: "0" }));
-
-  const btnHover = () =>
-    setLoginCss((prevState) => ({
-      ...prevState,
-      color: "rgb(57, 153, 255)",
-      rotate: "rotateY(180deg)",
-      opacity: "1",
-    }));
-
-  const btnUnhover = () =>
-    setLoginCss((prevState) => ({
-      ...prevState,
-      color: "white",
-      rotate: "rotateY(0deg)",
-      opacity: "0",
-    }));
-
-  //
   return (
     <div className="nav-bar" style={{ backgroundColor: navBarBackgroundColor }}>
       <div>
@@ -61,15 +37,42 @@ const NavBar = () => {
         <p>Home</p>
         <p>Contact</p>
         <p>Free Plan</p>
-        <p>Shop</p>
+        <p
+          onMouseEnter={() => {
+            setShop(true);
+            setShopCss({ color: "rgb(57, 153, 255)", opacity: "1" });
+          }}
+          style={{ color: shopCss.color }}
+        >
+          Shop
+        </p>
+        {shop && (
+          <div
+            className="shop-container"
+            onMouseLeave={() => {
+              setShop(false);
+              setShopCss({
+                color: "white",
+                opacity: "0",
+              });
+            }}
+          >
+            <i class="fa-solid fa-caret-up"></i>
+            <div className="invisible-shop"></div>
+          </div>
+        )}
       </div>
       <div className="button-profile">
         <p>
           <i
             className="fa-solid fa-user"
             onMouseEnter={() => {
-              profileOptions();
-              btnHover();
+              setLogin(true);
+              setLoginCss({
+                color: "rgb(57, 153, 255)",
+                rotate: "rotateY(180deg)",
+                opacity: "1",
+              });
             }}
             style={{ color: loginCss.color, transform: loginCss.rotate }}
           ></i>
@@ -78,9 +81,15 @@ const NavBar = () => {
           <div
             className="profile-options"
             onMouseLeave={() => {
-              hideProfileOptions();
-              btnUnhover();
-              opacityOut();
+              setTimeout(() => {
+                setLogin(false);
+              }, 300);
+              setLoginCss({
+                color: "white",
+                rotate: "rotateY(0deg)",
+                opacity: "0",
+              });
+              setLoginCss.opacity("0");
             }}
             style={{ opacity: loginCss.opacity }}
           >

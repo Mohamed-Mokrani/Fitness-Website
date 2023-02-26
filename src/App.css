@@ -132,6 +132,34 @@
   margin: -50px -168px 0 0;
   cursor: pointer;
 }
+
+
+
+.shop-container{
+  width: 500px;
+  height: 300px;
+  
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.907);
+  margin: 41px 0px 0 -190px;
+  border: rgba(255, 255, 255, 0.29) 1px solid;
+  animation: fadeIn 300ms;
+}
+
+.shop-container .fa-caret-up{
+  color: white;
+  position: absolute;
+  margin: -15px 0px 0 465px;
+}
+
+.invisible-shop{
+  cursor: pointer;
+  width: 55px;
+  height: 50px;
+  position: absolute;
+  margin: -47px 0 0 443px;
+  
+}
 /* Home */
 
 .home-video video {
