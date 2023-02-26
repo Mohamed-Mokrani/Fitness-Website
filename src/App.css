@@ -138,12 +138,14 @@
 .shop-container{
   width: 500px;
   height: 300px;
-  
   position: absolute;
   background-color: rgba(0, 0, 0, 0.907);
   margin: 41px 0px 0 -190px;
   border: rgba(255, 255, 255, 0.29) 1px solid;
+  transition: 300ms;
   animation: fadeIn 300ms;
+  
+  
 }
 
 .shop-container .fa-caret-up{

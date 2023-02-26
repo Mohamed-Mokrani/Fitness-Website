@@ -50,12 +50,16 @@ const NavBar = () => {
           <div
             className="shop-container"
             onMouseLeave={() => {
-              setShop(false);
+              setTimeout(() => {
+                setShop(false);
+              }, 300);
+
               setShopCss({
                 color: "white",
                 opacity: "0",
               });
             }}
+            style={{ opacity: shopCss.opacity }}
           >
             <i class="fa-solid fa-caret-up"></i>
             <div className="invisible-shop"></div>
